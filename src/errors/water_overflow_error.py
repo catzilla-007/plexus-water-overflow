@@ -1,2 +1,0 @@
-class WaterOverFlowError(Exception):
-    pass

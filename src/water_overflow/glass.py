@@ -1,4 +1,4 @@
-from src.errors.glass_initialization_error import GlassInitializationError
+from src.errors.water_flow_error import WaterFlowError
 
 
 class Glass(object):
@@ -7,15 +7,21 @@ class Glass(object):
         self.base = base
         self.line = line
         self._value = 0
-        self._validate_glass()
 
-    def _validate_glass(self):
-        if self.base < 0:
-            raise GlassInitializationError('base glass should be non-negative')
-        if self.capacity < 0:
-            raise GlassInitializationError('glass capacity should be non-negative')
-        if self.line < 0:
-            raise GlassInitializationError('glass line should be non-negative')
-        if self.line > self.base:
-            raise GlassInitializationError('glass line should be less than the base')
+    def pour(self, value: float) -> float:
+        if value < 0:
+            raise WaterFlowError('water flow should be non-negative')
+        self._value += value
+        if self.is_full():
+            return self._overflow()
+        return 0
 
+    def is_full(self) -> bool:
+        if self._value >= self.capacity:
+            return True
+        return False
+
+    def _overflow(self) -> float:
+        overflow = self._value - self.capacity
+        self._value = self.capacity
+        return overflow

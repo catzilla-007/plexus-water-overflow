@@ -1,0 +1,2 @@
+class WaterFlowError(Exception):
+    pass

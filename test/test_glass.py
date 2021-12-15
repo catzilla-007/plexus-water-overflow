@@ -1,6 +1,6 @@
-from pytest import raises, mark
-from src.errors.glass_initialization_error import GlassInitializationError
+from pytest import mark, raises
 
+from src.errors.water_flow_error import WaterFlowError
 from src.water_overflow.glass import Glass
 
 
@@ -11,31 +11,27 @@ def test_first_glass_should_initiate():
     assert glass.line == 0
 
 
-valid_glass = [
-    (250, 0, 0),
-    (200, 1, 1),
-    (100, 3, 2),
-    (50, 4, 0)
-]
+def test_n_glass_should_initiate():
+    glass = Glass(200, 10, 3)
+    assert glass.capacity == 200
+    assert glass.base == 10
+    assert glass.line == 3
 
 
-@mark.parametrize('capacity,base,line', valid_glass)
-def test_glass_should_initiate(capacity, base, line):
-    glass = Glass(capacity, base, line)
-    assert glass.capacity == capacity
-    assert glass.base == base
-    assert glass.line == line
+@mark.parametrize('pour,is_full', [(100, True), (50, False), (130, True), (0, False)])
+def test_glass_is_full(pour, is_full):
+    glass = Glass(100)
+    glass.pour(pour)
+    assert glass.is_full() is is_full
 
 
-invalid_glass = [
-    (-1, 1, 1),
-    (1, -1, 1),
-    (1, 1, -1),
-    (1, 1, 2),
-]
+def test_glass_is_full_fails():
+    glass = Glass(100)
+    with raises(WaterFlowError):
+        glass.pour(-1)
 
 
-@mark.parametrize('capacity,base,line', invalid_glass)
-def test_invalid_glass_should_raise(capacity, base, line):
-    with raises(GlassInitializationError):
-        Glass(capacity, base, line)
+def test_glass_pour_overflow():
+    glass = Glass(10)
+    overflow = glass.pour(14)
+    assert overflow == 4

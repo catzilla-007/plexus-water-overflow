@@ -1,0 +1,2 @@
+class GlassValidationError(Exception):
+    pass
