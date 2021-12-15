@@ -1,0 +1,2 @@
+class WaterOverFlowError(Exception):
+    pass
