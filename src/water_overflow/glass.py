@@ -21,6 +21,10 @@ class Glass(object):
             return True
         return False
 
+    @property
+    def value(self) -> float:
+        return self._value
+
     def _overflow(self) -> float:
         overflow = self._value - self.capacity
         self._value = self.capacity

@@ -35,3 +35,9 @@ def test_glass_pour_overflow():
     glass = Glass(10)
     overflow = glass.pour(14)
     assert overflow == 4
+
+
+def test_glass_get_value():
+    glass = Glass(10)
+    glass.pour(4)
+    assert glass.value == 4
