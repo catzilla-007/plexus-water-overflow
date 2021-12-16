@@ -15,7 +15,6 @@ def test_glass_pyramid_initialises(pyramid):
 
 
 def test_glass_pyramid_invalid_glass(pyramid):
-
     with raises(GlassValidationError):
         pyramid.get_glass(2, 3)
         pyramid.get_glass(-1, 0)
