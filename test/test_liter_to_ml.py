@@ -1,5 +1,5 @@
 from pytest import raises, mark
-from src.water_overflow.liter_to_ml import liter_to_ml
+from src.helpers.liter_to_ml import liter_to_ml
 from src.errors.liters_conversion_error import LitersConversionError
 
 

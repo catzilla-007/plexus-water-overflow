@@ -1,6 +1,6 @@
 from pytest import raises, fixture
 
-from src.water_overflow.glass_pyramid import GlassPyramid
+from src.core.glass_pyramid import GlassPyramid
 from src.errors.glass_validation_error import GlassValidationError
 
 
@@ -26,5 +26,5 @@ def test_pour_water_in_pyramid(pyramid):
 
     glass = pyramid.get_glass(0, 0)
     glass2 = pyramid.get_glass(2, 2)
-    assert glass.value == 250
-    assert glass2.value == 62.5
+    assert glass.content == 250
+    assert glass2.content == 62.5

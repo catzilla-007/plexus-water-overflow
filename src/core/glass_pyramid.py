@@ -1,13 +1,13 @@
 from .glass import Glass
 from .glass_validator import GlassValidator
-from .liter_to_ml import liter_to_ml
+from src.helpers.liter_to_ml import liter_to_ml
 
 
 class GlassPyramid(object):
     def __init__(self, capacity: int, liter: float):
         self._ml = liter_to_ml(liter)
         self._capacity = capacity
-        self._pyramid: [(int, int), Glass] = {(0, 0): Glass(capacity)}
+        self._pyramid: [(int, int), Glass] = {}
 
     def _add_glass(self, base=0, line=0):
         glass = self.get_glass(base, line)
@@ -30,12 +30,13 @@ class GlassPyramid(object):
             return Glass(self._capacity, base, line)
 
     def pour(self, ml: float = None, glass: Glass = None):
+        # this can possibly be transferred to another class
         if not ml:
             ml = self._ml
         if not glass:
             glass = self._add_glass()
 
-        overflow = glass.pour(ml)
+        overflow = glass.fill(ml)
 
         if overflow > 0:
             l_glass = self._add_glass(glass.base + 1, glass.line)

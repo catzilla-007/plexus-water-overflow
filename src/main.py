@@ -1,12 +1,9 @@
-from src.water_overflow.glass_pyramid import GlassPyramid
+from src.cli.commands import pour
 
 
 def main():
-    pyramid = GlassPyramid(250, 1)
-    pyramid.pour()
-
-    glass = pyramid.get_glass(2, 2)
-    print(glass.value)
+    pour()
 
 
-main()
+if __name__ == '__main__':
+    main()

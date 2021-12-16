@@ -6,26 +6,22 @@ class Glass(object):
         self.capacity = capacity
         self.base = base
         self.line = line
-        self._value = 0
+        self.content = 0
 
-    def pour(self, value: float) -> float:
+    def fill(self, value: float) -> float:
         if value < 0:
             raise WaterFlowError('water flow should be non-negative')
-        self._value += value
+        self.content += value
         if self.is_full():
             return self._overflow()
         return 0
 
     def is_full(self) -> bool:
-        if self._value >= self.capacity:
+        if self.content >= self.capacity:
             return True
         return False
 
-    @property
-    def value(self) -> float:
-        return self._value
-
     def _overflow(self) -> float:
-        overflow = self._value - self.capacity
-        self._value = self.capacity
+        overflow = self.content - self.capacity
+        self.content = self.capacity
         return overflow

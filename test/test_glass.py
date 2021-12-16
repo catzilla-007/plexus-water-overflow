@@ -1,7 +1,7 @@
 from pytest import mark, raises
 
 from src.errors.water_flow_error import WaterFlowError
-from src.water_overflow.glass import Glass
+from src.core.glass import Glass
 
 
 def test_first_glass_should_initiate():
@@ -21,23 +21,23 @@ def test_n_glass_should_initiate():
 @mark.parametrize('pour,is_full', [(100, True), (50, False), (130, True), (0, False)])
 def test_glass_is_full(pour, is_full):
     glass = Glass(100)
-    glass.pour(pour)
+    glass.fill(pour)
     assert glass.is_full() is is_full
 
 
 def test_glass_is_full_fails():
     glass = Glass(100)
     with raises(WaterFlowError):
-        glass.pour(-1)
+        glass.fill(-1)
 
 
 def test_glass_pour_overflow():
     glass = Glass(10)
-    overflow = glass.pour(14)
+    overflow = glass.fill(14)
     assert overflow == 4
 
 
 def test_glass_get_value():
     glass = Glass(10)
-    glass.pour(4)
-    assert glass.value == 4
+    glass.fill(4)
+    assert glass.content == 4

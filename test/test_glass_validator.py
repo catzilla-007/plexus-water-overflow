@@ -1,6 +1,6 @@
 from pytest import mark, raises
 
-from src.water_overflow.glass_validator import GlassValidator
+from src.core.glass_validator import GlassValidator
 from src.errors.glass_validation_error import GlassValidationError
 
 valid_glass = [
