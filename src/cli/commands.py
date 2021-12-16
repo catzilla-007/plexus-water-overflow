@@ -3,8 +3,9 @@ import click
 from src.core.glass_pyramid import GlassPyramid
 from .pyramid_display import PyramidDisplay
 
+
 @click.command()
-@click.option('--liters', default=1, help='set number of liters to pour')
+@click.option('--liters', default=1.0, help='set number of liters to pour')
 @click.option('--capacity', default=250, help='set glass capacity')
 @click.option('--i', default=0, help='the i position of the glass to check')
 @click.option('--j', default=0, help='the j position of the glass to check')
